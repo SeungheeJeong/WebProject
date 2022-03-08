@@ -22,13 +22,15 @@ class LoginForm(forms.Form):
                 "User does not exist"))
 
 
-class SignUpForm(forms.Form):
-    first_name = forms.CharField(max_length=80, label="이름")
-    email = forms.EmailField(label="이메일")
+class SignUpForm(forms.ModelForm):
+
+    class Meta:
+        model = models.User
+        fields = ("first_name", "email", "hp")
+
     password = forms.CharField(widget=forms.PasswordInput, label="비밀번호")
     password1 = forms.CharField(
         widget=forms.PasswordInput, label="비밀번호 확인")
-    hp = forms.CharField(max_length=11, label="전화번호")
 
     def clean_email(self):
         email = self.cleaned_data.get("email")
@@ -47,14 +49,23 @@ class SignUpForm(forms.Form):
         else:
             return password
 
-    def save(self):
-        first_name = self.cleaned_data.get("first_name")
+    def save(self, *args, **kwargs):
+        user = super().save(commit=False)
+
         email = self.cleaned_data.get("email")
         password = self.cleaned_data.get("password")
-        password1 = self.cleaned_data.get("password1")
-        hp = self.cleaned_data.get("hp")
-
-        user = models.User.objects.create_user(email, email, password)
-        user.first_name = first_name
-        user.hp = hp
+        user.username = email
+        user.set_password(password)
         user.save()
+
+    # def save(self):
+    #     first_name = self.cleaned_data.get("first_name")
+    #     email = self.cleaned_data.get("email")
+    #     password = self.cleaned_data.get("password")
+    #     password1 = self.cleaned_data.get("password1")
+    #     hp = self.cleaned_data.get("hp")
+
+    #     user = models.User.objects.create_user(email, email, password)
+    #     user.first_name = first_name
+    #     user.hp = hp
+    #     user.save()

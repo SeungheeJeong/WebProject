@@ -9,7 +9,7 @@
         <ul class="navbar-nav">
             <li class="nav-item ">
                 {% if request.user.is_authenticated %}
-                <li><a class="nav-link" href="">{{ request.user.first_name }}</a></li>
+                <li><a class="nav-link" href="{% url 'users:detail' user.pk %}">{{ request.user.first_name }}</a></li>
                 <li><a class="nav-link" href="{% url 'users:logout' %}">(로그아웃)</a></li>
                 {% else %}
                 <li><a class="nav-link" href="{% url 'users:login' %}">로그인</a></li>

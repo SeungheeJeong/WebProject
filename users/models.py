@@ -1,5 +1,6 @@
 from django.db import models
 from django.contrib.auth.models import AbstractUser
+from django.shortcuts import reverse
 
 
 class User(AbstractUser):
@@ -8,10 +9,10 @@ class User(AbstractUser):
     COURSE_CLOUD = "cloud"
     COURSE_IOT = "iot"
     COURSE_CHOICES = (
-        (COURSE_BIGDATA, "BIGDATA"),
-        (COURSE_AI, "AI"),
-        (COURSE_CLOUD, "CLOUD"),
-        (COURSE_IOT, "IOT")
+        (COURSE_BIGDATA, "빅데이터 프로젝트과정"),
+        (COURSE_AI, "AI 프로젝트과정"),
+        (COURSE_CLOUD, "클라우드 프로젝트과정"),
+        (COURSE_IOT, "IOT 프로젝트과정")
     )
     birthdate = models.DateField(null=True, blank=True)
     avatar = models.ImageField(null=True, blank=True)

@@ -1,9 +1,10 @@
 from django.urls import reverse_lazy
 from django.views import View
-from django.views.generic import FormView
+from django.views.generic import FormView, DetailView, UpdateView
 from django.shortcuts import render, redirect, reverse
 from django.contrib.auth import login, logout, authenticate
 from . import forms
+from . import models
 
 
 class LoginView(FormView):
@@ -31,13 +32,6 @@ class SignUpView(FormView):
     form_class = forms.SignUpForm
     success_url = reverse_lazy("qnaboard:index")
 
-    initial = {
-        'first_name': 'John',
-        'last_name': 'Mayer',
-        'email': 'johnm@gmail.com',
-        'hp': '01033334444'
-    }
-
     def form_valid(self, form):
         form.save()
         email = form.cleaned_data.get("email")
@@ -46,3 +40,23 @@ class SignUpView(FormView):
         if user is not None:
             login(self.request, user)
         return super().form_valid(form)
+
+
+class UserProfileView(DetailView):
+    model = models.User
+    context_object_name = "user_obj"
+
+
+class UpdateProfileView(UpdateView):
+    model = models.User
+    template_name = "users/update_profile.html"
+    fields = (
+        "first_name",
+        "avatar",
+        "hp",
+        "birthdate",
+        "takencourse"
+    )
+
+    def get_object(self, queryset=None):
+        return self.request.user
