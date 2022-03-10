@@ -4,8 +4,8 @@ from . import models
 
 class LoginForm(forms.Form):
 
-    email = forms.EmailField()
-    password = forms.CharField(widget=forms.PasswordInput)
+    email = forms.EmailField(label="이메일주소")
+    password = forms.CharField(widget=forms.PasswordInput, label="비밀번호")
 
     def clean(self):
         email = self.cleaned_data.get("email")
@@ -27,7 +27,11 @@ class SignUpForm(forms.ModelForm):
     class Meta:
         model = models.User
         fields = ("first_name", "email", "hp")
-
+        labels = {
+            'first_name': '사용자이름',
+            'email': '이메일주소',
+            'hp': '전화번호',
+        }
     password = forms.CharField(widget=forms.PasswordInput, label="비밀번호")
     password1 = forms.CharField(
         widget=forms.PasswordInput, label="비밀번호 확인")
@@ -57,15 +61,3 @@ class SignUpForm(forms.ModelForm):
         user.username = email
         user.set_password(password)
         user.save()
-
-    # def save(self):
-    #     first_name = self.cleaned_data.get("first_name")
-    #     email = self.cleaned_data.get("email")
-    #     password = self.cleaned_data.get("password")
-    #     password1 = self.cleaned_data.get("password1")
-    #     hp = self.cleaned_data.get("hp")
-
-    #     user = models.User.objects.create_user(email, email, password)
-    #     user.first_name = first_name
-    #     user.hp = hp
-    #     user.save()

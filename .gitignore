@@ -42,3 +42,6 @@ pydevd*.log
 nodeLanguageServer/**
 nodeLanguageServer.*/**
 dist/**
+
+#Mac
+uploads/

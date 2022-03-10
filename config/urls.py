@@ -15,10 +15,17 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path, include
-
+from django.conf import settings
+from django.conf.urls.static import static
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('qnaboard/', include('qnaboard.urls')),
     path('users/', include('users.urls')),
+    path('challenges/', include('challenges.urls')),
 ]
+
+# 프로덕션 모드인지 개발 모드인지 검사 - debug 모드가 켜져있는지 확인 하고 이미지의 url을 static 으로 변경함
+if settings.DEBUG:
+    urlpatterns += static(settings.MEDIA_URL,
+                          document_root=settings.MEDIA_ROOT)

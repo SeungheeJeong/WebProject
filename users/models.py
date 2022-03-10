@@ -15,7 +15,7 @@ class User(AbstractUser):
         (COURSE_IOT, "IOT 프로젝트과정")
     )
     birthdate = models.DateField(null=True, blank=True)
-    avatar = models.ImageField(null=True, blank=True)
+    avatar = models.ImageField(upload_to="avatars", blank=True)
     takencourse = models.CharField(
         choices=COURSE_CHOICES, max_length=20, null=True, blank=True)
     hp = models.CharField(max_length=11, null=True, blank=True)

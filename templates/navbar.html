@@ -15,6 +15,9 @@
                 <li><a class="nav-link" href="{% url 'users:login' %}">로그인</a></li>
                 <li><a class="nav-link" href="{% url 'users:signup' %}">회원가입</a></li>
                 {% endif %}
+
+                <li><a class="nav-link" href="{% url 'qnaboard:index' %}">Q&A</a></li>
+                <li><a class="nav-link" href="{% url 'challenges:create' %}">챌린지</a></li>
             </li>
         </ul>
     </div>

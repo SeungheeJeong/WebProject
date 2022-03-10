@@ -41,6 +41,7 @@ DJANGO_APPS = [
 PROJECT_APPS = [
     'users.apps.UsersConfig',
     'qnaboard.apps.QnaboardConfig',
+    'challenges.apps.ChallengesConfig',
 ]
 
 INSTALLED_APPS = DJANGO_APPS + PROJECT_APPS
@@ -130,3 +131,7 @@ STATICFILES_DIRS = [
 ]
 
 AUTH_USER_MODEL = 'users.User'
+
+MEDIA_ROOT = os.path.join(BASE_DIR, "uploads")
+
+MEDIA_URL = "/media/"
