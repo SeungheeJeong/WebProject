@@ -1,13 +1,11 @@
 {% extends 'base.html' %}
-{% block page_title %}
-    {{user_obj.first_name}}'s Profile
-{% endblock %}
 {% block content %}
 
 <h1>{{challenge.subject}}</h1>
+<!-- 좋아요 버튼 Start-->
+<a href="{% url 'challenges:join' challenger.id %}"></a>
+<p>{{ challenge.challenger.count }} 참여중</p>
+    <!-- 좋아요 버튼 END -->
 <hr>
 <hr>
-{% if user == user_obj %}
-    <a href="{% url 'challenges:update' %}">도전정보 수정하기</a>
-{% endif %}
 {% endblock %}

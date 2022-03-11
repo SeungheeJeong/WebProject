@@ -42,6 +42,9 @@ PROJECT_APPS = [
     'users.apps.UsersConfig',
     'qnaboard.apps.QnaboardConfig',
     'challenges.apps.ChallengesConfig',
+    'group.apps.GroupConfig',
+    'map.apps.MapConfig',
+    'study.apps.StudyConfig',
 ]
 
 INSTALLED_APPS = DJANGO_APPS + PROJECT_APPS

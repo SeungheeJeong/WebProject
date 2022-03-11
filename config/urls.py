@@ -23,6 +23,11 @@ urlpatterns = [
     path('qnaboard/', include('qnaboard.urls')),
     path('users/', include('users.urls')),
     path('challenges/', include('challenges.urls')),
+    path('bigday/', include('bigday.urls')),
+    path('study/', include('study.urls')),
+    path('map/', include('map.urls')),
+    path('competition/', include('competition.urls')),
+    path('group/', include('group.urls')),
 ]
 
 # 프로덕션 모드인지 개발 모드인지 검사 - debug 모드가 켜져있는지 확인 하고 이미지의 url을 static 으로 변경함

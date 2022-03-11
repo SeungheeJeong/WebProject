@@ -51,6 +51,7 @@ class Photo(core_models.TimeStampedModel):
     """Photo Model Definition"""
     caption = models.CharField(max_length=150)
     file = models.ImageField(upload_to="challenge_photo")
+    challenger = models.ForeignKey("users.User", on_delete=models.CASCADE)
     challenge = models.ForeignKey(
         "Challenge", related_name="selfauth", on_delete=models.CASCADE)
 

@@ -5,7 +5,7 @@
 {% block content %}
 <p>{{user_obj.avatar}}</p>
 <h1>{{ user_obj.first_name}}님의 프로필</h1>
-{% if user == user_obj %}
+{% if user == user_obj || user.%}
     <p>전화번호: {{ user_obj.hp}}</p>
 {% endif %}
 <p>수강중인과정: {{ user_obj.takencourse}}</p>
