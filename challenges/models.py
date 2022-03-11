@@ -1,5 +1,7 @@
 from django.db import models
 from core import models as core_models
+from datetime import datetime, timedelta
+from django.utils import timezone
 
 
 class Challenge(core_models.TimeStampedModel):
@@ -38,8 +40,9 @@ class Challenge(core_models.TimeStampedModel):
     routine = models.CharField(
         max_length=15, choices=ROUTINE_CHOICES, default=ROUTINE_EVERYDAY)
     num_of_auth_per_day = models.IntegerField(default=1)
-    date_start = models.DateTimeField()
-    date_finish = models.DateTimeField()
+    date_start = models.DateField(default=timezone.now(), editable=True)
+    date_finish = models.DateField(
+        default=(timezone.now() + timedelta(weeks=1)), editable=True)
     created = models.DateField()
     modified = models.DateField()
 

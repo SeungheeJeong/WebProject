@@ -4,7 +4,7 @@ from . import views
 app_name = 'challenges'
 
 urlpatterns = [
-    path('create/', views.CreateChallengeView.as_view(),
+    path('create/', views.Challenge_create,
          name='create'),
     path('list/', views.ChallengeList,
          name='list'),

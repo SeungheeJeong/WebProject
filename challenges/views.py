@@ -2,22 +2,37 @@ from django.shortcuts import render, get_object_or_404, redirect
 from django.views.generic import FormView, DetailView
 from django.core.paginator import Paginator
 from django.contrib.auth.decorators import login_required
-from datetime import datetime, timedelta
+from django.utils import timezone
 from . import models
 from . import forms
 
 
-class CreateChallengeView(FormView):
-    challenge = models.Challenge
-    template_name = "challenges/challenge_create.html"
-    form_class = forms.CreateChallengeForm
+@login_required(login_url='users:login')  # 로그인을 어노테이션 - 로그인 상태에서 작동되게
+def Challenge_create(request):
+    """
+    챌린지 게시하기
+    """
+    if request.method == 'POST':
+        form = forms.CreateChallengeForm(request.POST)
+        if form.is_valid():
+            # 데이터베이스에 저장하기 전에 commit=False는 임시저장, date를 생성하기 위해 잠시 기다리는 중
+            Challenge = form.save(commit=False)
+            Challenge.host = request.user
+            Challenge.save()
+            # 저장이 끝나면 index(질문목록) 화면으로 돌아간다.
+            return redirect('challenges:list')
+    else:
+        form = forms.CreateChallengeForm()
+    context = {'form': form}
+    return render(request, 'challenges/challenge_create.html', context)
+# class CreateChallengeView(FormView):
+#     challenge = models.Challenge
+#     template_name = "challenges/challenge_create.html"
+#     form_class = forms.CreateChallengeForm
 
-    challenge.date_start = datetime.now()
-    challenge.date_finish = datetime.now() + timedelta(weeks=1)
-
-    def form_valid(self, form):
-        form.save()
-        return super().form_valid(form)
+#     def form_valid(self, form):
+#         form.save()
+#         return super().form_valid(form)
 
 
 class ChallengeDetailView(DetailView):

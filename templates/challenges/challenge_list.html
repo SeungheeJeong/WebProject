@@ -7,6 +7,7 @@
     {% for challenge in challenge_list %}
         <tr>
             <td class = "text-left">
+            <img src ="{% static 'img/1_programing.png' %}"/>
                 <a href = "{% url 'challenges:detail' challenge.id  %}">{{ challenge.subject }} </a></td>
             <td>{{ challenge.host.first_name }}</td> <!-- 글쓴이 속성 추가 -->
             <td>{{ challenge.challenger.count}}</td>
